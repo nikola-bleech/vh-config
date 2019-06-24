@@ -1,4 +1,4 @@
-## Config generator for Apache Virtual Host
+## Config generator for Apache Virtual Host :computer:
 
 ### Installation:
 Run `brew tap nikola-bleech/vh-config` from the terminal to download the package.

@@ -1,0 +1,20 @@
+{
+  "name": "vh-config",
+  "version": "0.1.1",
+  "description": "Virtual Host Config Utility",
+  "main": "vh-config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "virtualhost",
+    "apache",
+    "config"
+  ],
+  "preferGlobal": true,
+  "author": "Nikola Jovanovic",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
+}

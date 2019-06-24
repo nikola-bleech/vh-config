@@ -1,5 +1,5 @@
 {
-  "name": "vh-config",
+  "name": "@nikola_bleech/vh-config",
   "version": "0.1.1",
   "description": "Virtual Host Config Utility",
   "main": "vh-config.js",
@@ -15,6 +15,7 @@
   "author": "Nikola Jovanovic",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^2.4.2"
+    "chalk": "^2.4.2",
+    "pkg": "^4.4.0"
   }
 }

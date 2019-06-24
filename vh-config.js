@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Apache Virtual Host config generator
  * ====================================

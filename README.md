@@ -2,6 +2,7 @@
 
 ### Installation:
 Run `brew tap nikola-bleech/vh-config` from the terminal to download the package.
+
 Run `brew install vh-config` to install it.
 
 ### Usage:

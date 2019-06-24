@@ -1,10 +1,11 @@
 ## Config generator for Apache Virtual Host
 
 ### Installation:
-Run `npm install git+https://github.com/nikola-bleech/vh-config.git` in root folder of your project.
+Run `brew tap nikola-bleech/vh-config` from the terminal to download the package.
+Run `brew install vh-config` to install it.
 
 ### Use:
-Run `node vh-config` from root folder of your project to generate apache config files.
+Run `vh-config` from root folder of your project to generate apache config files.
 
 ### Options:
 List of available options:

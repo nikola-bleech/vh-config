@@ -4,7 +4,8 @@
   "description": "Virtual Host Config Utility",
   "main": "vh-config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg vh-config.js -t macos --output bin/vh-config"
   },
   "keywords": [
     "virtualhost",

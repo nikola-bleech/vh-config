@@ -16,7 +16,9 @@
   "author": "Nikola Jovanovic",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^2.4.2"
+  },
+  "devDependencies": {
     "pkg": "^4.4.0"
   }
 }

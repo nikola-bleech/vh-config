@@ -7,14 +7,15 @@
 
 const fs = require('fs')
 const path = require('path')
-const chalk = require('chalk');
+const chalk = require('chalk')
+const shell = require('shelljs')
 
 const args = process.argv
 
 const version = {
     major: 0,
-    minor: 0,
-    patch: 3
+    minor: 1,
+    patch: 4
 }
 
 // Options
@@ -184,8 +185,7 @@ if (args.length < 2) {
 }
 
 // Config template
-const template = `
-<VirtualHost *:8080>
+const template = `<VirtualHost *:8080>
     DocumentRoot ${workDir}/web
     ServerName ${projectName}.local.blee.ch
     RewriteCond ${workDir}/web/%{REQUEST_FILENAME} -f
@@ -209,24 +209,25 @@ const template = `
     </Directory>
 </VirtualHost>
 `
+
+// Output file name
+const fileName = `${projectName}.conf`
+
+// Create symlink
+const symLn = (fileName)=> {
+    const lnTarget = path.join(root, dest, fileName)
+    const lnRef = path.join(root, clone, fileName)
+
+    shell.ln('-s', lnTarget, lnRef)
+}
+
 // Write to config files
 const configCreate = () => {
-    // Output file name
-    const fileName = `${projectName}.conf`
-
-    // Create symlink
-    const symLn = ()=> {
-        // Change the process working dir
-        process.chdir(clone)
-    }
-
     // Write config file to disk
     fs.writeFile(path.join(root, dest, fileName), template, (err) => {
         if (err) throw err
 
-        fs.copyFile(path.join(root, dest, fileName), path.join(root, clone, fileName), (err) => {
-            if (err) throw err;
-          });
+        symLn(fileName)
 
         // File written successfully
         console.log(`File named ${chalk.yellow(fileName)} was created.`)

@@ -14,7 +14,7 @@ const args = process.argv
 const version = {
     major: 0,
     minor: 0,
-    patch: 2
+    patch: 3
 }
 
 // Options

@@ -13,7 +13,7 @@ const args = process.argv
 
 const version = {
     major: 0,
-    minor: 1,
+    minor: 0,
     patch: 2
 }
 

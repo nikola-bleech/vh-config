@@ -17,5 +17,5 @@ List of available options:
 
 ### Notice:
 Current version is `v0.1.4`. If you are having trouble updating via brew, please try:
-* `brew upgrade`
+* `brew upgrade` or
 * `brew uninstall vh-config` and then `brew install vh-config`

@@ -14,13 +14,11 @@ const args = process.argv
 const version = {
     major: 0,
     minor: 1,
-    patch: 1
+    patch: 2
 }
 
 // Options
 let options = {
-    noAppend: 0,
-    single: 0,
     force: 0
 }
 
@@ -171,12 +169,6 @@ if (args.length < 2) {
     } else if (args.indexOf('-h') != -1 || args.indexOf('--help') != -1) {
         printHelp()
         end()
-    // -n, --no-append
-    } else if (args.indexOf('-n') != -1 || args.indexOf('--no-append') != -1) {
-        options.noAppend = 1
-    // -s, --single
-    } else if (args.indexOf('-s') != -1 || args.indexOf('--single') != -1) {
-        options.noAppend = 1
     // -f, --force
     } else if (args.indexOf('-f') != -1 || args.indexOf('--force') != -1) {
         options.force = 1
@@ -221,8 +213,6 @@ const template = `
 const configCreate = () => {
     // Output file name
     const fileName = `${projectName}.conf`
-
-    console.log(fileName)
 
     // Create symlink
     const symLn = ()=> {

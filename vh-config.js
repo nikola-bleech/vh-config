@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 
 /**
  * Apache Virtual Host config generator
@@ -14,13 +13,15 @@ const args = process.argv
 
 const version = {
     major: 0,
-    minor: 1,
-    patch: 4
+    minor: 2,
+    patch: 0
 }
 
 // Options
 let options = {
-    force: 0
+    force: 0,
+    restart: 0,
+    overwrite: 0
 }
 
 // Names
@@ -51,8 +52,16 @@ const helpText = {
                 'print command line options'
             ],
             [
+                '-r, --restart',
+                'restarts brew httpd service'
+            ],
+            [
                 '-v',
                 'print vh-config version number'
+            ],
+            [
+                '-x',
+                'overwrite existing config file'
             ]
         ]
     }
@@ -151,14 +160,13 @@ const genWhiteSpace = (padding) => {
     }
  }
 
- scan()
+scan()
 
 /**
  * Read arguments
  */
 if (args.length < 2) {
-    print('No arguments provided', 'error')
-    print('Usage: vh-config <project name> [arguments]')
+    print('Looks like something went wrong.', 'error')
     // Kill the process
     end()
 } else if (args.length >= 2) {
@@ -170,14 +178,25 @@ if (args.length < 2) {
     } else if (args.indexOf('-h') != -1 || args.indexOf('--help') != -1) {
         printHelp()
         end()
-    // -f, --force
-    } else if (args.indexOf('-f') != -1 || args.indexOf('--force') != -1) {
-        options.force = 1
     // -d, --default
     } else if (args.indexOf('-d') != -1 || args.indexOf('--default') != -1) {
         print(`Target path: ${root}`)
         end()
     }
+
+    // -f, --force
+    if (args.indexOf('-f') != -1 || args.indexOf('--force') != -1) {
+        options.force = 1
+    }
+    // -r, --restart
+    if (args.indexOf('-r') != -1 || args.indexOf('--restart') != -1) {
+        options.restart = 1
+    }
+    // -x
+    if (args.indexOf('-x') != -1) {
+        options.overwrite = 1
+    }
+
 
     const pathNodes = workDir.split('/')
 
@@ -221,6 +240,26 @@ const symLn = (fileName)=> {
     shell.ln('-s', lnTarget, lnRef)
 }
 
+const restartServices = (service) => {
+    const brewRestart = 'brew services restart'
+    if (service === 'httpd') {
+        return `${brewRestart} httpd`
+    }
+}
+
+// Clean up previous config file
+const cleanUp = () => {
+    const fileAvailable = path.join(root, dest, fileName)
+    const fileEnabled = path.join(root, clone, fileName)
+    if (fs.existsSync(fileAvailable)) {
+        fs.unlink(fileAvailable, (err) => {
+            if (err) throw err
+        })
+        // Remove the symlink
+        shell.rm('-r', fileEnabled)
+    }
+}
+
 // Write to config files
 const configCreate = () => {
     // Write config file to disk
@@ -231,13 +270,25 @@ const configCreate = () => {
 
         // File written successfully
         console.log(`File named ${chalk.yellow(fileName)} was created.`)
-    });
+
+        if (options.restart) {
+            // Try to restart services
+            print('Sending restart command `httpd`:')
+            shell.exec(restartServices('httpd'))
+        }
+    })
 }
 
 if (!fs.existsSync(path.join(workDir, 'web')) && options.force === 0 ) {
     print('Current directory doesn\'t seem to be a valid project.')
     print('Please use \'--force\' option to suppress this warning.')
     end()
+} else if (fs.existsSync(path.join(root, dest, fileName)) && !options.overwrite) {
+    print(`Looks like the config file (${fileName}) already exists. Please delete it before trying again or use the '-x' flag.`, 'error')
+    end()
 } else {
+    if (options.overwrite) {
+        cleanUp()
+    }
     configCreate()
 }

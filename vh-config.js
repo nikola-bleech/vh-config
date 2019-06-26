@@ -1,4 +1,3 @@
-
 /**
  * Apache Virtual Host config generator
  * ====================================
@@ -26,7 +25,6 @@ let options = {
 
 // Names
 let projectName = ''
-const nameAppend = '-website'
 
 // Paths
 const root = "/usr/local/etc/httpd"

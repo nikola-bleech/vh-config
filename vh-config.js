@@ -13,7 +13,7 @@ const args = process.argv
 const version = {
     major: 0,
     minor: 2,
-    patch: 0
+    patch: 1
 }
 
 // Options
@@ -33,7 +33,7 @@ const clone = "sites-enabled"
 const workDir = process.cwd()
 
 const helpText = {
-    usage: 'Usage: vh-config <project name> [arguments]',
+    usage: 'Usage: vh-config [arguments]',
     options: {
         title: 'Options:',
         list: [
@@ -194,7 +194,6 @@ if (args.length < 2) {
     if (args.indexOf('-x') != -1) {
         options.overwrite = 1
     }
-
 
     const pathNodes = workDir.split('/')
 

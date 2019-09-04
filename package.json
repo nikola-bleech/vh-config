@@ -1,6 +1,6 @@
 {
   "name": "@nikola_bleech/vh-config",
-  "version": "0.1.1",
+  "version": "0.3.0",
   "description": "Virtual Host Config Utility",
   "main": "vh-config.js",
   "scripts": {
@@ -17,7 +17,10 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.2",
-    "shelljs": "^0.8.3"
+    "enquirer": "^2.3.1",
+    "get-directory-file-list": "^0.1.3",
+    "shelljs": "^0.8.3",
+    "tree-parser": "^1.2.4"
   },
   "devDependencies": {
     "pkg": "^4.4.0"

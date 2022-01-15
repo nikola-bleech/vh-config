@@ -19,7 +19,7 @@
     "chalk": "^2.4.2",
     "enquirer": "^2.3.1",
     "get-directory-file-list": "^0.1.3",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "tree-parser": "^1.2.4"
   },
   "devDependencies": {
